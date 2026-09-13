@@ -1,0 +1,325 @@
+<mxfile host="Electron" version="24.7.17">
+  <diagram name="Page-1" id="private-api-gateway-diagram">
+    <mxGraphModel dx="1200" dy="800" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="2670" pageHeight="720" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===================== TITLE BLOCK ===================== -->
+        <mxCell id="title-group" connectable="0" style="group;fontFamily=Helvetica;" value="" vertex="1" parent="1">
+          <mxGeometry height="83" width="2570" x="50" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="title-text" style="text;html=1;resizable=1;points=[];autosize=1;align=left;verticalAlign=top;spacingTop=-4;fontSize=30;fontStyle=1;fontFamily=Helvetica;" value="Private API Gateway Reference Architecture" vertex="1" parent="title-group">
+          <mxGeometry height="42" width="900" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle-text" style="text;html=1;resizable=0;points=[];autosize=1;align=left;verticalAlign=top;spacingTop=-4;fontSize=16;fontFamily=Helvetica;" value="A fully private REST API reachable only through CloudFront and AWS PrivateLink -- no public execute-api endpoint" vertex="1" parent="title-group">
+          <mxGeometry height="25" width="1000" x="5" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="title-separator" style="line;strokeWidth=2;html=1;fontSize=14;strokeColor=#FF9900;fontFamily=Helvetica;" value="" vertex="1" parent="title-group">
+          <mxGeometry height="10" width="2560" x="5" y="70" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== CLIENT (external actor) ===================== -->
+        <mxCell id="users-container" style="fillColor=#f5f5f5;strokeColor=light-dark(#666666,#D4D4D4);rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#333333;fontFamily=Helvetica;container=1;collapsible=0;shadow=1;strokeWidth=1;perimeterSpacing=0;" value="Client" vertex="1" parent="1">
+          <mxGeometry x="50" y="150" height="120" width="120" as="geometry" />
+        </mxCell>
+        <mxCell id="users-icon" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#232F3D;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.users;fontFamily=Helvetica;" value="" vertex="1" parent="users-container">
+          <mxGeometry x="36" y="30" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== ROUTE 53 (optional DNS) ===================== -->
+        <mxCell id="svc-group-route53" style="fillColor=#EDE7F6;strokeColor=#8C4FFF;rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#8C4FFF;fontFamily=Helvetica;container=1;collapsible=0;shadow=1;strokeWidth=1.5;" value="DNS (optional)" vertex="1" parent="1">
+          <mxGeometry x="330" y="150" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-route53" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_53;fontFamily=Helvetica;shadow=1;" value="Route 53&lt;div&gt;&lt;i&gt;only if hostedZoneId is set&lt;/i&gt;&lt;/div&gt;" vertex="1" parent="svc-group-route53">
+          <mxGeometry x="36" y="30" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== CLOUDFRONT ===================== -->
+        <mxCell id="svc-group-cloudfront" style="fillColor=#EDE7F6;strokeColor=#8C4FFF;rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#8C4FFF;fontFamily=Helvetica;container=1;collapsible=0;shadow=1;strokeWidth=1.5;" value="CDN / Edge" vertex="1" parent="1">
+          <mxGeometry x="610" y="150" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-cloudfront" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudfront;fontFamily=Helvetica;shadow=1;" value="CloudFront&lt;div&gt;&lt;i&gt;VPC Origin + alternate domain&lt;/i&gt;&lt;/div&gt;" vertex="1" parent="svc-group-cloudfront">
+          <mxGeometry x="36" y="30" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== WAF ===================== -->
+        <mxCell id="svc-group-waf" style="fillColor=#FFEBEE;strokeColor=#DD344C;rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#DD344C;fontFamily=Helvetica;container=1;collapsible=0;shadow=1;strokeWidth=1.5;" value="Security" vertex="1" parent="1">
+          <mxGeometry x="610" y="340" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-waf" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.waf;fontFamily=Helvetica;shadow=1;" value="AWS WAF&lt;div&gt;&lt;i&gt;AWS managed rules&lt;/i&gt;&lt;/div&gt;" vertex="1" parent="svc-group-waf">
+          <mxGeometry x="36" y="30" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== VPC (bridge + PrivateLink door) ===================== -->
+        <mxCell id="vpc-group" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=14;fontStyle=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_vpc2;strokeColor=#8C4FFF;fillColor=light-dark(#8C4FFF0D,#8C4FFF0D);fillStyle=auto;verticalAlign=top;align=left;spacingLeft=30;fontColor=#8C4FFF;dashed=0;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;fontFamily=Helvetica;" value="VPC -- 2 private isolated subnets across 2 AZs, no NAT/IGW" vertex="1" parent="1">
+          <mxGeometry x="890" y="100" width="420" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-group-alb" style="fillColor=#FFF2E8;strokeColor=#ED7100;rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#ED7100;fontFamily=Helvetica;container=1;collapsible=0;shadow=1;strokeWidth=1.5;" value="Compute" vertex="1" parent="vpc-group">
+          <mxGeometry x="30" y="60" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-alb" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.application_load_balancer;fontFamily=Helvetica;shadow=1;" value="Internal ALB&lt;div&gt;&lt;i&gt;internal, HTTPS:443&lt;/i&gt;&lt;/div&gt;" vertex="1" parent="svc-group-alb">
+          <mxGeometry x="36" y="30" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-group-vpce" style="fillColor=#EDE7F6;strokeColor=#8C4FFF;rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#8C4FFF;fontFamily=Helvetica;container=1;collapsible=0;shadow=1;strokeWidth=1.5;" value="Networking" vertex="1" parent="vpc-group">
+          <mxGeometry x="210" y="60" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-vpce" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.vpc_privatelink;fontFamily=Helvetica;shadow=1;" value="VPC Endpoint&lt;div&gt;&lt;i&gt;execute-api, PrivateLink&lt;/i&gt;&lt;/div&gt;" vertex="1" parent="svc-group-vpce">
+          <mxGeometry x="36" y="30" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== API GATEWAY ===================== -->
+        <mxCell id="svc-group-apigw" style="fillColor=#EDE7F6;strokeColor=#8C4FFF;rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#8C4FFF;fontFamily=Helvetica;container=1;collapsible=0;shadow=1;strokeWidth=1.5;" value="Networking" vertex="1" parent="1">
+          <mxGeometry x="1490" y="150" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-apigw" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.api_gateway;fontFamily=Helvetica;shadow=1;" value="Private REST API&lt;div&gt;&lt;i&gt;resource policy: aws:SourceVpce&lt;/i&gt;&lt;/div&gt;" vertex="1" parent="svc-group-apigw">
+          <mxGeometry x="36" y="30" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== COGNITO ===================== -->
+        <mxCell id="svc-group-cognito" style="fillColor=#FFEBEE;strokeColor=#DD344C;rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#DD344C;fontFamily=Helvetica;container=1;collapsible=0;shadow=1;strokeWidth=1.5;" value="Security" vertex="1" parent="1">
+          <mxGeometry x="1490" y="340" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-cognito" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cognito;fontFamily=Helvetica;shadow=1;" value="Cognito User Pool&lt;div&gt;&lt;i&gt;JWT authorizer&lt;/i&gt;&lt;/div&gt;" vertex="1" parent="svc-group-cognito">
+          <mxGeometry x="36" y="30" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== LAMBDA ===================== -->
+        <mxCell id="svc-group-lambda" style="fillColor=#FFF2E8;strokeColor=#ED7100;rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#ED7100;fontFamily=Helvetica;container=1;collapsible=0;shadow=1;strokeWidth=1.5;" value="Compute" vertex="1" parent="1">
+          <mxGeometry x="1790" y="150" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-lambda" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;fontFamily=Helvetica;shadow=1;" value="Lambda&lt;div&gt;&lt;i&gt;handler.ts&lt;/i&gt;&lt;/div&gt;" vertex="1" parent="svc-group-lambda">
+          <mxGeometry x="36" y="30" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== DYNAMODB ===================== -->
+        <mxCell id="svc-group-dynamodb" style="fillColor=#F5E6F7;strokeColor=#C925D1;rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#C925D1;fontFamily=Helvetica;container=1;collapsible=0;shadow=1;strokeWidth=1.5;" value="Database" vertex="1" parent="1">
+          <mxGeometry x="2090" y="150" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-dynamodb" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#C925D1;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;fontFamily=Helvetica;shadow=1;" value="DynamoDB&lt;div&gt;&lt;i&gt;on-demand&lt;/i&gt;&lt;/div&gt;" vertex="1" parent="svc-group-dynamodb">
+          <mxGeometry x="36" y="30" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== EDGES ===================== -->
+
+        <!-- e1: Client -> Route 53 -->
+        <mxCell id="edge-1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;elbow=vertical;startArrow=none;endFill=1;strokeColor=#545B64;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="users-icon" target="svc-route53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1-label" value="1. Resolve domain (optional)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontSize=11;fontFamily=Helvetica;" connectable="0" vertex="1" parent="edge-1">
+          <mxGeometry relative="1" x="0" y="-1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- e2: Client -> CloudFront (routed above Route 53) -->
+        <mxCell id="edge-2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;elbow=vertical;startArrow=none;endFill=1;strokeColor=#545B64;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="users-icon" target="svc-cloudfront">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="110" y="110" />
+              <mxPoint x="670" y="110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-2-label" value="2. HTTPS request" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontSize=11;fontFamily=Helvetica;" connectable="0" vertex="1" parent="edge-2">
+          <mxGeometry relative="1" x="0" y="0" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- e3: CloudFront -> WAF (attached) -->
+        <mxCell id="edge-3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;elbow=vertical;startArrow=none;endFill=1;strokeColor=#545B64;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="svc-cloudfront" target="svc-waf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-3-label" value="3. WAF inspects the request" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontSize=11;fontFamily=Helvetica;" connectable="0" vertex="1" parent="edge-3">
+          <mxGeometry relative="1" x="0" y="0" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- e4: CloudFront -> Internal ALB (VPC Origin) -->
+        <mxCell id="edge-4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;elbow=vertical;startArrow=none;endFill=1;strokeColor=#545B64;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="svc-cloudfront" target="svc-alb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-4-label" value="4. VPC Origin forwards to the ALB" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontSize=11;fontFamily=Helvetica;" connectable="0" vertex="1" parent="edge-4">
+          <mxGeometry relative="1" x="0" y="-1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- e5: ALB -> VPC Endpoint -->
+        <mxCell id="edge-5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;elbow=vertical;startArrow=none;endFill=1;strokeColor=#545B64;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="svc-alb" target="svc-vpce">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-5-label" value="5. Forwards to the endpoint's IP targets" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontSize=11;fontFamily=Helvetica;" connectable="0" vertex="1" parent="edge-5">
+          <mxGeometry relative="1" x="0" y="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- e6: VPC Endpoint -> API Gateway (PrivateLink) -->
+        <mxCell id="edge-6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;elbow=vertical;startArrow=none;endFill=1;strokeColor=#545B64;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="svc-vpce" target="svc-apigw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-6-label" value="6. Delivered over PrivateLink" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontSize=11;fontFamily=Helvetica;" connectable="0" vertex="1" parent="edge-6">
+          <mxGeometry relative="1" x="0" y="-1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- e7: API Gateway -> Cognito (JWT authorizer) -->
+        <mxCell id="edge-7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;elbow=vertical;startArrow=none;endFill=1;strokeColor=#545B64;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="svc-apigw" target="svc-cognito">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-7-label" value="7. Validate JWT before Lambda" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontSize=11;fontFamily=Helvetica;" connectable="0" vertex="1" parent="edge-7">
+          <mxGeometry relative="1" x="0" y="0" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- e8: API Gateway -> Lambda -->
+        <mxCell id="edge-8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;elbow=vertical;startArrow=none;endFill=1;strokeColor=#545B64;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="svc-apigw" target="svc-lambda">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-8-label" value="8. Invoke Lambda" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontSize=11;fontFamily=Helvetica;" connectable="0" vertex="1" parent="edge-8">
+          <mxGeometry relative="1" x="0" y="-1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- e9: Lambda -> DynamoDB -->
+        <mxCell id="edge-9" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;elbow=vertical;startArrow=none;endFill=1;strokeColor=#545B64;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="svc-lambda" target="svc-dynamodb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-9-label" value="9. Read / write item" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontSize=11;fontFamily=Helvetica;" connectable="0" vertex="1" parent="edge-9">
+          <mxGeometry relative="1" x="0" y="-1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- e10: Cognito -> Client (issues JWT, out of band, dashed) -->
+        <mxCell id="edge-10" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;elbow=vertical;startArrow=none;endFill=1;strokeColor=#545B64;rounded=0;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="svc-cognito" target="users-icon">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1550" y="560" />
+              <mxPoint x="110" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-10-label" value="Sign-in: Cognito issues the JWT the client attaches to every request" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=none;fontSize=11;fontFamily=Helvetica;" connectable="0" vertex="1" parent="edge-10">
+          <mxGeometry relative="1" x="0" y="0" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- ===================== STEP BADGES ===================== -->
+        <mxCell id="step-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=16;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;align=center;verticalAlign=middle;labelBackgroundColor=none;" value="1" vertex="1" parent="1">
+          <mxGeometry x="150" y="130" width="28" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="step-2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=16;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;align=center;verticalAlign=middle;labelBackgroundColor=none;" value="2" vertex="1" parent="1">
+          <mxGeometry x="60" y="96" width="28" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="step-3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=16;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;align=center;verticalAlign=middle;labelBackgroundColor=none;" value="3" vertex="1" parent="1">
+          <mxGeometry x="650" y="284" width="28" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="step-4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=16;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;align=center;verticalAlign=middle;labelBackgroundColor=none;" value="4" vertex="1" parent="1">
+          <mxGeometry x="740" y="196" width="28" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="step-5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=16;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;align=center;verticalAlign=middle;labelBackgroundColor=none;" value="5" vertex="1" parent="1">
+          <mxGeometry x="956" y="166" width="28" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="step-6" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=16;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;align=center;verticalAlign=middle;labelBackgroundColor=none;" value="6" vertex="1" parent="1">
+          <mxGeometry x="1136" y="166" width="28" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="step-7" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=16;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;align=center;verticalAlign=middle;labelBackgroundColor=none;" value="7" vertex="1" parent="1">
+          <mxGeometry x="1530" y="284" width="28" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="step-8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=16;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;align=center;verticalAlign=middle;labelBackgroundColor=none;" value="8" vertex="1" parent="1">
+          <mxGeometry x="1620" y="196" width="28" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="step-9" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=16;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;align=center;verticalAlign=middle;labelBackgroundColor=none;" value="9" vertex="1" parent="1">
+          <mxGeometry x="1920" y="196" width="28" height="28" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== LEGEND ===================== -->
+        <mxCell id="legend-bg" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.rect;fillColor2=none;strokeWidth=1;size=20;indent=5;fillColor=light-dark(#EDF3FF,#305363);strokeColor=#6c8ebf;" value="" vertex="1" parent="1">
+          <mxGeometry height="660" width="650" x="2250" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-container" connectable="0" style="group" value="" vertex="1" parent="1">
+          <mxGeometry height="620" width="602" x="2270" y="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step-1-legend" connectable="0" style="group;fontFamily=Helvetica;" value="" vertex="1" parent="legend-container">
+          <mxGeometry height="62" width="600" x="0" y="0" as="geometry" />
+        </mxCell>
+        <mxCell id="step-1-badge-legend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=22;labelBackgroundColor=none;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;" value="1" vertex="1" parent="step-1-legend">
+          <mxGeometry height="38" width="40" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="step-1-desc-legend" style="text;html=1;align=left;verticalAlign=top;spacingTop=-4;fontSize=14;labelBackgroundColor=none;whiteSpace=wrap;fontFamily=Helvetica;" value="&lt;div&gt;&lt;b&gt;Client resolves the domain&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0,0,0), rgb(255,255,255));&quot;&gt;Only happens if hostedZoneId is configured -- otherwise DNS is managed outside this stack.&lt;/span&gt;&lt;/div&gt;" vertex="1" parent="step-1-legend">
+          <mxGeometry height="62" width="548" x="52" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step-2-legend" connectable="0" style="group;fontFamily=Helvetica;" value="" vertex="1" parent="legend-container">
+          <mxGeometry height="62" width="600" x="0" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="step-2-badge-legend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=22;labelBackgroundColor=none;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;" value="2" vertex="1" parent="step-2-legend">
+          <mxGeometry height="38" width="40" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="step-2-desc-legend" style="text;html=1;align=left;verticalAlign=top;spacingTop=-4;fontSize=14;labelBackgroundColor=none;whiteSpace=wrap;fontFamily=Helvetica;" value="&lt;div&gt;&lt;b&gt;Client sends an HTTPS request&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0,0,0), rgb(255,255,255));&quot;&gt;Request carries the client's JWT and is sent to the CloudFront alternate domain name.&lt;/span&gt;&lt;/div&gt;" vertex="1" parent="step-2-legend">
+          <mxGeometry height="62" width="548" x="52" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step-3-legend" connectable="0" style="group;fontFamily=Helvetica;" value="" vertex="1" parent="legend-container">
+          <mxGeometry height="62" width="600" x="0" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="step-3-badge-legend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=22;labelBackgroundColor=none;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;" value="3" vertex="1" parent="step-3-legend">
+          <mxGeometry height="38" width="40" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="step-3-desc-legend" style="text;html=1;align=left;verticalAlign=top;spacingTop=-4;fontSize=14;labelBackgroundColor=none;whiteSpace=wrap;fontFamily=Helvetica;" value="&lt;div&gt;&lt;b&gt;WAF inspects the request&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0,0,0), rgb(255,255,255));&quot;&gt;AWS Managed Rules attached to the CloudFront distribution filter malicious requests at the edge.&lt;/span&gt;&lt;/div&gt;" vertex="1" parent="step-3-legend">
+          <mxGeometry height="62" width="548" x="52" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step-4-legend" connectable="0" style="group;fontFamily=Helvetica;" value="" vertex="1" parent="legend-container">
+          <mxGeometry height="62" width="600" x="0" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="step-4-badge-legend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=22;labelBackgroundColor=none;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;" value="4" vertex="1" parent="step-4-legend">
+          <mxGeometry height="38" width="40" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="step-4-desc-legend" style="text;html=1;align=left;verticalAlign=top;spacingTop=-4;fontSize=14;labelBackgroundColor=none;whiteSpace=wrap;fontFamily=Helvetica;" value="&lt;div&gt;&lt;b&gt;CloudFront forwards to the internal ALB&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0,0,0), rgb(255,255,255));&quot;&gt;A CloudFront VPC Origin is required because a VPC Endpoint is not a supported CloudFront origin type.&lt;/span&gt;&lt;/div&gt;" vertex="1" parent="step-4-legend">
+          <mxGeometry height="62" width="548" x="52" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step-5-legend" connectable="0" style="group;fontFamily=Helvetica;" value="" vertex="1" parent="legend-container">
+          <mxGeometry height="62" width="600" x="0" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="step-5-badge-legend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=22;labelBackgroundColor=none;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;" value="5" vertex="1" parent="step-5-legend">
+          <mxGeometry height="38" width="40" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="step-5-desc-legend" style="text;html=1;align=left;verticalAlign=top;spacingTop=-4;fontSize=14;labelBackgroundColor=none;whiteSpace=wrap;fontFamily=Helvetica;" value="&lt;div&gt;&lt;b&gt;ALB forwards to the VPC Endpoint&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0,0,0), rgb(255,255,255));&quot;&gt;Target group IPs are the endpoint's ENIs, resolved at deploy time via a custom resource.&lt;/span&gt;&lt;/div&gt;" vertex="1" parent="step-5-legend">
+          <mxGeometry height="62" width="548" x="52" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step-6-legend" connectable="0" style="group;fontFamily=Helvetica;" value="" vertex="1" parent="legend-container">
+          <mxGeometry height="62" width="600" x="0" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="step-6-badge-legend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=22;labelBackgroundColor=none;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;" value="6" vertex="1" parent="step-6-legend">
+          <mxGeometry height="38" width="40" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="step-6-desc-legend" style="text;html=1;align=left;verticalAlign=top;spacingTop=-4;fontSize=14;labelBackgroundColor=none;whiteSpace=wrap;fontFamily=Helvetica;" value="&lt;div&gt;&lt;b&gt;PrivateLink delivers the request to API Gateway&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0,0,0), rgb(255,255,255));&quot;&gt;Traffic never leaves AWS's network. The API's resource policy only allows this specific VPC Endpoint.&lt;/span&gt;&lt;/div&gt;" vertex="1" parent="step-6-legend">
+          <mxGeometry height="62" width="548" x="52" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step-7-legend" connectable="0" style="group;fontFamily=Helvetica;" value="" vertex="1" parent="legend-container">
+          <mxGeometry height="62" width="600" x="0" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="step-7-badge-legend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=22;labelBackgroundColor=none;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;" value="7" vertex="1" parent="step-7-legend">
+          <mxGeometry height="38" width="40" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="step-7-desc-legend" style="text;html=1;align=left;verticalAlign=top;spacingTop=-4;fontSize=14;labelBackgroundColor=none;whiteSpace=wrap;fontFamily=Helvetica;" value="&lt;div&gt;&lt;b&gt;API Gateway validates the JWT&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0,0,0), rgb(255,255,255));&quot;&gt;A Cognito authorizer checks the token issued at sign-in before allowing the request through.&lt;/span&gt;&lt;/div&gt;" vertex="1" parent="step-7-legend">
+          <mxGeometry height="62" width="548" x="52" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step-8-legend" connectable="0" style="group;fontFamily=Helvetica;" value="" vertex="1" parent="legend-container">
+          <mxGeometry height="62" width="600" x="0" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="step-8-badge-legend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=22;labelBackgroundColor=none;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;" value="8" vertex="1" parent="step-8-legend">
+          <mxGeometry height="38" width="40" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="step-8-desc-legend" style="text;html=1;align=left;verticalAlign=top;spacingTop=-4;fontSize=14;labelBackgroundColor=none;whiteSpace=wrap;fontFamily=Helvetica;" value="&lt;div&gt;&lt;b&gt;API Gateway invokes Lambda&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0,0,0), rgb(255,255,255));&quot;&gt;Lambda runs outside the VPC -- it only needs to reach DynamoDB over the public AWS API surface.&lt;/span&gt;&lt;/div&gt;" vertex="1" parent="step-8-legend">
+          <mxGeometry height="62" width="548" x="52" as="geometry" />
+        </mxCell>
+
+        <mxCell id="step-9-legend" connectable="0" style="group;fontFamily=Helvetica;" value="" vertex="1" parent="legend-container">
+          <mxGeometry height="62" width="600" x="0" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="step-9-badge-legend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007CBD;strokeColor=default;fontColor=#FFFFFF;fontStyle=1;fontSize=22;labelBackgroundColor=none;fontFamily=Helvetica;shadow=1;glass=0;strokeWidth=2;" value="9" vertex="1" parent="step-9-legend">
+          <mxGeometry height="38" width="40" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="step-9-desc-legend" style="text;html=1;align=left;verticalAlign=top;spacingTop=-4;fontSize=14;labelBackgroundColor=none;whiteSpace=wrap;fontFamily=Helvetica;" value="&lt;div&gt;&lt;b&gt;Lambda reads/writes DynamoDB&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(0,0,0), rgb(255,255,255));&quot;&gt;On-demand table, keyed by the configurable partition/sort key names.&lt;/span&gt;&lt;/div&gt;" vertex="1" parent="step-9-legend">
+          <mxGeometry height="62" width="548" x="52" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,10 +1,11 @@
 # Private API Gateway Template
 
-![Architecture Diagram](./docs/architecture-diagram.png)
-<!-- TODO: the image above does not exist yet. Claude Code cannot generate
-     a diagram image file -- add your own architecture-diagram.png under
-     docs/ (see docs/README.md for what it should depict), then remove
-     this comment. -->
+An editable architecture diagram is at [`docs/architecture-diagram.drawio`](./docs/architecture-diagram.drawio)
+(open it at [diagrams.net](https://app.diagrams.net)). A rendered PNG has
+not been generated yet -- see `docs/README.md` for how to export one and
+drop it in as `docs/architecture-diagram.png`, then swap this paragraph
+for a `![Architecture Diagram](./docs/architecture-diagram.png)` image
+embed.
 
 This is a **reference architecture template**, not a deploy-and-forget
 solution. It is a starting point for a fully private AWS API: every
